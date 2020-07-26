@@ -8,11 +8,21 @@ export default (dataObj) => {
     return null;
   }
 
+  // return (
+  //   <div className="card">
+  //     <div className="card-body">
+  //       {title ? <h4 className="card-title">{title}</h4> : null}
+  //       {text ? <p className="card-text">{text}</p> : null}
+  //     </div>
+  //   </div>
+  // );
+  const titleDom = title && <h4 className="card-title">{title}</h4>;
+  const textDom = text && <p className="card-text">{text}</p>;
   return (
     <div className="card">
       <div className="card-body">
-        {title ? <h4 className="card-title">{title}</h4> : null}
-        {text ? <p className="card-text">{text}</p> : null}
+        {titleDom}
+        {textDom}
       </div>
     </div>
   );
