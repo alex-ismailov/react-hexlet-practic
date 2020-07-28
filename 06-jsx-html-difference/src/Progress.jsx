@@ -6,7 +6,6 @@ import React from 'react';
 export default class Progress extends React.Component {
   render() {
     const { percentage } = this.props;
-
     return (
       <div className="progress">
         <div
