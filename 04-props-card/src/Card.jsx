@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';
-import { render } from 'react-dom';
 
 // BEGIN (write your solution here)
 export default class Card extends React.Component {
