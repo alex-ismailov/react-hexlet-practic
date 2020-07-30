@@ -7,27 +7,30 @@ export default class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: props.images,
       activeIndex: 0,
+      images: props.images.map((url) => {
+        const key = `${url}_${_.uniqueId()}`;
+        return { url, key };
+      }),
     };
   }
 
   clickHandler = (e) => {
     e.preventDefault();
     const direction = e.currentTarget.dataset.slide;
-    const { activeIndex, images } = this.state;
+    const { images } = this.state;
 
     switch (direction) {
       case 'prev':
-        this.setState({
-          activeIndex: (activeIndex + (images.length - 1)) % images.length,
-        });
+        this.setState((state) => ({
+          activeIndex: (state.activeIndex + (images.length - 1)) % images.length,
+        }));
         break;
 
       case 'next':
-        this.setState({
-          activeIndex: (activeIndex + 1) % images.length,
-        });
+        this.setState((state) => ({
+          activeIndex: (state.activeIndex + 1) % images.length,
+        }));
         break;
 
       default:
@@ -36,17 +39,17 @@ export default class Carousel extends React.Component {
   };
 
   render() {
-    const { images, activeIndex } = this.state;
+    const { activeIndex, images } = this.state;
 
-    const carouselItems = images.map((path, i) => {
+    const carouselItems = images.map(({ url, key }, i) => {
       const itemClass = cn({
         'carousel-item': true,
         active: activeIndex === i,
       });
 
       return (
-        <div key={`${path}_${_.uniqueId()}`} className={itemClass}>
-          <img alt="" className="d-block w-100" src={path} />
+        <div key={key} className={itemClass}>
+          <img alt="" className="d-block w-100" src={url} />
         </div>
       );
     });
