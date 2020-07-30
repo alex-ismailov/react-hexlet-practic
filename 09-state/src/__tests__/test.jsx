@@ -14,12 +14,12 @@ test('BtnGroup 1', () => {
   wrapper.find('.left').simulate('click');
   expect(wrapper.render()).toMatchSnapshot();
 
-  // wrapper.find('.right').simulate('click');
-  // expect(wrapper.render()).toMatchSnapshot();
+  wrapper.find('.right').simulate('click');
+  expect(wrapper.render()).toMatchSnapshot();
 
-  // wrapper.find('.left').simulate('click');
-  // expect(wrapper.render()).toMatchSnapshot();
+  wrapper.find('.left').simulate('click');
+  expect(wrapper.render()).toMatchSnapshot();
 
-  // wrapper.find('.left').simulate('click');
-  // expect(wrapper.render()).toMatchSnapshot();
+  wrapper.find('.left').simulate('click');
+  expect(wrapper.render()).toMatchSnapshot();
 });
