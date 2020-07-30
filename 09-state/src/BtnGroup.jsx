@@ -6,56 +6,42 @@ export default class BtnGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActiveLeftBtn: false,
-      isActiveRightBtn: false,
+      active: null,
     };
   }
 
-  btnLeftHandler = () => {
-    const { isActiveLeftBtn } = this.state;
-    if (isActiveLeftBtn) {
-      return;
-    }
+  setActive(active) {
+    this.setState({ active });
+  }
 
-    this.setState({
-      isActiveRightBtn: isActiveLeftBtn,
-      isActiveLeftBtn: !isActiveLeftBtn,
-    });
-  };
+  selectLeft = () => this.setActive('left');
 
-  btnRightHandler = () => {
-    const { isActiveRightBtn } = this.state;
-    if (isActiveRightBtn) {
-      return;
-    }
-
-    this.setState({
-      isActiveLeftBtn: isActiveRightBtn,
-      isActiveRightBtn: !isActiveRightBtn,
-    });
-  };
+  selectRight = () => this.setActive('right');
 
   render() {
-    const { isActiveLeftBtn, isActiveRightBtn } = this.state;
+    const { active } = this.state;
+
+    const sharedClasses = {
+      btn: true, 
+      'btn-secondary': true,
+    };
 
     const btnLeftClass = cn({
-      btn: true,
-      'btn-secondary': true,
-      left: true, 
-      active: isActiveLeftBtn,
+      ...sharedClasses,
+      left: true,
+      active: active === 'left',
     });
 
     const btnRightClass = cn({
-      btn: true,
-      'btn-secondary': true,
+      ...sharedClasses,
       right: true,
-      active: isActiveRightBtn,
+      active: active === 'right',
     });
 
     return (
       <div className="btn-group" role="group">
-        <button type="button" className={btnLeftClass} onClick={this.btnLeftHandler}>Left</button>
-        <button type="button" className={btnRightClass} onClick={this.btnRightHandler}>Right</button>
+        <button type="button" className={btnLeftClass} onClick={this.selectLeft}>Left</button>
+        <button type="button" className={btnRightClass} onClick={this.selectRight}>Right</button>
       </div>
     );
   }
