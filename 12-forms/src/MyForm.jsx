@@ -7,13 +7,15 @@ export default class MyForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 'editing',
-      email: '',
-      password: '',
-      address: '',
-      city: '',
-      country: '',
-      acceptRules: false,
+      form: {
+        email: '',
+        password: '',
+        address: '',
+        city: '',
+        country: '',
+        acceptRules: false,
+      },
+      submittingState: 'filingForm',
     };
   }
 
@@ -21,37 +23,64 @@ export default class MyForm extends React.Component {
     const { target, target: { name } } = e;
     const value = target.name === 'acceptRules' ? target.checked : target.value;
 
-    this.setState({
-      [name]: value,
-    });
+    this.setState(({ form }) => ({
+      form: { ...form, [name]: value },
+    }));
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({
-      mode: 'showing',
+      submittingState: 'showingFormData',
     });
   };
 
   handleBack = (e) => {
     e.preventDefault();
     this.setState({
-      mode: 'editing',
+      submittingState: 'filingForm',
     });
   };
 
-  render() {
+  renderRow = (key) => {
+    const { form } = this.state;
+    return (
+      <tr key={key}>
+        <td>{key}</td>
+        <td>{form[key].toString()}</td>
+      </tr>
+    );
+  };
+
+  renderResult = () => {
+    const { form } = this.state;
+    const keys = Object.keys(form).sort();
+
+    return (
+      <div>
+        <button onClick={this.handleBack} type="button">Back</button>
+        <table className="table">
+          <tbody>
+            {keys.map(this.renderRow)}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  renderForm = () => {
     const {
-      mode,
-      email,
-      password,
-      address,
-      city,
-      country,
-      acceptRules,
+      form: {
+        email,
+        password,
+        address,
+        city,
+        country,
+        acceptRules,
+      },
     } = this.state;
 
-    const form = (
+    return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-row">
           <div className="form-group col-md-6">
@@ -93,50 +122,20 @@ export default class MyForm extends React.Component {
         <button type="submit" className="btn btn-primary">Sign in</button>
       </form>
     );
+  };
 
-    const table = (
-      <div>
-        <button onClick={this.handleBack} type="button">Back</button>
-        <table className="table">
-          <tbody>
-            <tr>
-              <td>acceptRules</td>
-              <td>{acceptRules.toString()}</td>
-            </tr>
-            <tr>
-              <td>address</td>
-              <td>{address}</td>
-            </tr>
-            <tr>
-              <td>city</td>
-              <td>{city}</td>
-            </tr>
-            <tr>
-              <td>country</td>
-              <td>{country}</td>
-            </tr>
-            <tr>
-              <td>email</td>
-              <td>{email}</td>
-            </tr>
-            <tr>
-              <td>password</td>
-              <td>{password}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
+  render() {
+    const { submittingState } = this.state;
 
-    switch (mode) {
-      case 'editing':
-        return form;
+    switch (submittingState) {
+      case 'filingForm':
+        return this.renderForm();
 
-      case 'showing':
-        return table;
+      case 'showingFormData':
+        return this.renderResult();
 
       default:
-        throw new Error(`Unknown mode: ${mode}`);
+        throw new Error(`Unknown submittingState: ${submittingState}`);
     }
   }
 }
