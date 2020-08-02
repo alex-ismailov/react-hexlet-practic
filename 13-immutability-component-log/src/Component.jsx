@@ -8,52 +8,52 @@ export default class Component extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentValue: 0,
-      logs: [],
+      items: [],
     };
   }
 
   removeLog = (id) => () => {
-    const { logs } = this.state;
-    const newLogs = logs.filter((log) => log.id !== id);
+    const { items } = this.state;
+    const newItems = items.filter((item) => item.id !== id);
 
     this.setState({
-      logs: newLogs,
+      items: newItems,
     });
   };
 
-  handleIncrease = () => this.addNewLog(1);
+  handleIncrease = () => this.handleCount(1);
 
-  handleDecrease = () => this.addNewLog(-1);
+  handleDecrease = () => this.handleCount(-1);
 
-  addNewLog(value) {
-    this.setState(({ currentValue, logs }) => {
-      const id = _.uniqueId();
-      const newValue = currentValue + value;
-      const button = <button onClick={this.removeLog(id)} key={id} type="button" className="list-group-item list-group-item-action">{newValue}</button>;
-      const newLog = {
-        id,
-        button,
-      };
+  handleCount(value) {
+    this.setState(({ items }) => {
+      const newValue = _.get(items, [0, 'value'], 0) + value;
+      const newItem = { id: _.uniqueId(), value: newValue };
 
       return {
-        currentValue: newValue,
-        logs: [newLog, ...logs],
+        items: [newItem, ...items],
       };
     });
   }
 
   renderLogs() {
-    const { logs } = this.state;
-    if (logs.length === 0) {
+    const { items } = this.state;
+    if (items.length === 0) {
       return null;
     }
 
-    const buttons = logs.map(({ button }) => button);
-
     return (
       <div className="list-group">
-        {buttons}
+        {items.map(({ id, value }) => (
+          <button
+            key={id}
+            onClick={this.removeLog(id)}
+            type="button"
+            className="list-group-item list-group-item-action"
+          >
+            {value}
+          </button>
+        ))}
       </div>
     );
   }
