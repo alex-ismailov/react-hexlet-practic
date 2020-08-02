@@ -13,8 +13,7 @@ export default class Component extends React.Component {
     };
   }
 
-  removeLog = (id) => (e) => {
-    e.preventDefault();
+  removeLog = (id) => () => {
     const { logs } = this.state;
     const newLogs = logs.filter((log) => log.id !== id);
 
