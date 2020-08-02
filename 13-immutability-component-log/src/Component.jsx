@@ -23,37 +23,33 @@ export default class Component extends React.Component {
     });
   };
 
-  addNewLog(value, logs) {
-    const id = _.uniqueId();
-    const button = <button onClick={this.removeLog(id)} key={id} type="button" className="list-group-item list-group-item-action">{value}</button>;
-    
-    const newLog = {
-      id: id,
-      button,
-    };
+  handleIncrease = () => this.addNewLog(1);
 
-    return {
-      currentValue: value,
-      logs: [ newLog, ...logs ],
-    };
+  handleDecrease = () => this.addNewLog(-1);
+
+  addNewLog(value) {
+    this.setState(({ currentValue, logs }) => {
+      const id = _.uniqueId();
+      const newValue = currentValue + value;
+      const button = <button onClick={this.removeLog(id)} key={id} type="button" className="list-group-item list-group-item-action">{newValue}</button>;
+      const newLog = {
+        id,
+        button,
+      };
+
+      return {
+        currentValue: newValue,
+        logs: [newLog, ...logs],
+      };
+    });
   }
 
-  handleIncrease = () => {
-    this.setState(({ currentValue, logs }) => {
-      const newValue = currentValue + 1;
-      return this.addNewLog(newValue, logs);
-    });
-  };
-
-  handleDecrease = () => {
-    this.setState(({ currentValue, logs }) => {
-      const newValue = currentValue - 1;
-      return this.addNewLog(newValue, logs);
-    });
-  };
-
-  renderLogs() { // TODO переназвать, подобрать более подходящее имя
+  renderLogs() {
     const { logs } = this.state;
+    if (logs.length === 0) {
+      return null;
+    }
+
     const buttons = logs.map(({ button }) => button);
 
     return (
@@ -64,15 +60,13 @@ export default class Component extends React.Component {
   }
 
   render() {
-    const { logs } = this.state;
-
     return (
       <div>
         <div className="btn-group" role="group">
           <button onClick={this.handleIncrease} type="button" className="btn hexlet-inc">+</button>
           <button onClick={this.handleDecrease} type="button" className="btn hexlet-dec">-</button>
         </div>
-        {logs.length > 0 ? this.renderLogs() : null}
+        {this.renderLogs()}
       </div>
     );
   }
