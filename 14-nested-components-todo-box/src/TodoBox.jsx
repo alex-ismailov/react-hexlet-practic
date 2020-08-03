@@ -36,7 +36,7 @@ export default class TodoBox extends React.Component {
 
   handleRemove = (id) => () => {
     const { notes } = this.state;
-    
+
     this.setState({
       notes: notes.filter((note) => note.id !== id),
     });
@@ -48,7 +48,9 @@ export default class TodoBox extends React.Component {
       return null;
     }
 
-    return notes.map(({ id, value }) => <Item key={id} task={value} onRemove={this.handleRemove(id)} />);
+    return notes.map(({ id, value }) => (
+      <Item key={id} task={value} onRemove={this.handleRemove(id)} />
+    ));
   }
 
   render() {
