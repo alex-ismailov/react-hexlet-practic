@@ -7,66 +7,70 @@ export default class TodoBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      notes: [],
+      newTaskText: '',
+      tasks: [],
     };
   }
 
-  handleSubmit = (e) => {
+  handleSubmitForm = (e) => {
     e.preventDefault();
-    const { value, notes } = this.state;
-    const id = uniqueId();
-    const newNote = {
-      id,
-      value,
+    const { newTaskText, tasks } = this.state;
+    const newTask = {
+      id: uniqueId(),
+      taskText: newTaskText,
     };
 
     this.setState({
-      value: '',
-      notes: [newNote, ...notes],
+      newTaskText: '',
+      tasks: [newTask, ...tasks],
     });
   };
 
-  handleInput = (e) => {
+  handleInputTask = (e) => {
     const { target: { value } } = e;
     this.setState({
-      value,
+      newTaskText: value,
     });
   };
 
-  handleRemove = (id) => () => {
-    const { notes } = this.state;
-
+  handleRemoveTask = (id) => () => {
+    const { tasks } = this.state;
     this.setState({
-      notes: notes.filter((note) => note.id !== id),
+      tasks: tasks.filter((task) => task.id !== id),
     });
   };
 
-  renderNotes() {
-    const { notes } = this.state;
-    if (notes.length === 0) {
+  renderTasks() {
+    const { tasks } = this.state;
+    if (tasks.length === 0) {
       return null;
     }
 
-    return notes.map(({ id, value }) => (
-      <Item key={id} task={value} onRemove={this.handleRemove(id)} />
+    return tasks.map(({ id, taskText }) => (
+      <Item key={id} task={taskText} onRemove={this.handleRemoveTask(id)} />
     ));
   }
 
-  render() {
-    const { value } = this.state;
+  renderForm() {
+    const { newTaskText } = this.state;
 
+    return (
+      <form onSubmit={this.handleSubmitForm} className="todo-form form-inline mx-3">
+        <div className="form-group">
+          <input onChange={this.handleInputTask} type="text" value={newTaskText} required className="form-control mr-3" placeholder="I am going..." />
+        </div>
+        <button type="submit" className="btn btn-primary">add</button>
+      </form>
+    );
+  }
+
+  render() {
     return (
       <div>
         <div className="mb-3">
-          <form onSubmit={this.handleSubmit} className="todo-form form-inline mx-3">
-            <div className="form-group">
-              <input onChange={this.handleInput} type="text" value={value} required="required" className="form-control mr-3" placeholder="I am going..." />
-            </div>
-            <button type="submit" className="btn btn-primary">add</button>
-          </form>
+          {this.renderForm()}
         </div>
-        {this.renderNotes()}
+        {this.renderTasks()}
       </div>
     );
   }
