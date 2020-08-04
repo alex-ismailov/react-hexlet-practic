@@ -8,7 +8,7 @@ const Header = ({ toggle, children }) => (
   <div className="modal-header">
     <div className="modal-title">{children}</div>
     <button onClick={toggle} type="button" className="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">×</span>
+      <span aria-hidden="true">&times;</span>
     </button>
   </div>
 );
