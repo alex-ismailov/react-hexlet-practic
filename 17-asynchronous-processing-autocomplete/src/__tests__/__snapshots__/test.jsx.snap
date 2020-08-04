@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Autocomplete 1`] = `
+<ul>
+  <li>
+    albania
+  </li>
+  <li>
+    aljir
+  </li>
+</ul>
+`;
+
+exports[`Autocomplete 2`] = `
+<ul>
+  <li>
+    albania
+  </li>
+  <li>
+    aljir
+  </li>
+</ul>
+`;
+
+exports[`Autocomplete 3`] = `
+<ul>
+  <li>
+    albania
+  </li>
+</ul>
+`;
