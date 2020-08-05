@@ -27,5 +27,8 @@ exports[`Autocomplete 3`] = `
   <li>
     albania
   </li>
+  <li>
+    aljir
+  </li>
 </ul>
 `;

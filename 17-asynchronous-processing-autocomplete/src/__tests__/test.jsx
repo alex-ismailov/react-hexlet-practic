@@ -5,7 +5,8 @@ import React from 'react';
 import axios from 'axios';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { delay } from 'nanodelay';
+// import { delay } from 'nanodelay';
+import delay from 'delay';
 import Autocomplete from '../Autocomplete.jsx';
 
 const host = 'http://localhost';
