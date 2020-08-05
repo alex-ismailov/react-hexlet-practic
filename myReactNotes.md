@@ -25,3 +25,21 @@
   },
 
 ***
+
+
+#### Switch off CORS policy
+
+В Express необходимо добавить след. midellware:
+
+```
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+```
+
+[link to src](https://qastack.ru/programming/23751914/how-can-i-set-response-header-on-express-js-assets)
+
+***
