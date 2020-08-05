@@ -7,13 +7,23 @@ export default () => {
   const filePath = '/home/smile/code/react-hexlet-practic/17-asynchronous-processing-autocomplete/server/countries.json'; 
   const countries = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
+  /* switch off CORS policy */
+  /* https://qastack.ru/programming/23751914/how-can-i-set-response-header-on-express-js-assets */
+  app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
+  /* **** */
+
   app.get('/countries', (req, res) => {
     const term = req.query.term;
-    const suitableСountries = countries
+    const filteredСountries = countries
       .filter(({ name }) => name.toLowerCase().includes(term.toLowerCase()))
       .map(({ name }) => name);
 
-    res.json(suitableСountries);
+    res.json(filteredСountries);
   });
 
   return app;
