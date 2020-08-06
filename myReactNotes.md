@@ -43,3 +43,17 @@ app.use((req, res, next) => {
 [link to src](https://qastack.ru/programming/23751914/how-can-i-set-response-header-on-express-js-assets)
 
 ***
+
+
+#### Express post data setting
+
+Для того чтобы в Express вопользоваться req.body, т.е. данныими которые пришли в POST запросе
+необходимо добавить след. midellware:
+
+```
+app.use(Express.json()) // for parsing application/json
+```
+
+[link to src](https://qastack.ru/programming/23751914/how-can-i-set-response-header-on-express-js-assets)
+
+***
