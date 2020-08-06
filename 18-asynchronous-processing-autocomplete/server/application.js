@@ -4,6 +4,7 @@ import fs from 'fs';
 export default () => {
   const app = new Express();
 
+  /* country database src: https://github.com/dr5hn/countries-states-cities-database */
   const filePath = '/home/smile/code/react-hexlet-practic/17-asynchronous-processing-autocomplete/server/countries.json'; 
   const countries = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 
