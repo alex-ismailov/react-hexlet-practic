@@ -7,9 +7,19 @@ export default () => {
   const app = new Express();
 
   const tasks = [
-    new Task('asdf', 'finished'),
-    new Task('asdasd'),
+    new Task(1003, 'asdf', 'finished'),
+    new Task(1004, 'asdasd'),
   ];
+
+  /* switch off CORS policy */
+  /* https://qastack.ru/programming/23751914/how-can-i-set-response-header-on-express-js-assets */
+  app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE, PATCH');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
+  /* **** */
 
   /* for parsing application/json */
   app.use(Express.json())
@@ -22,10 +32,11 @@ export default () => {
 
 
   // Формат запроса - {"text": "new task"}
-  // curl -XPOST -H 'Content-Type: application/json' --data '{"text": "new task"}' localhost:8080/tasks
-  app.post('/tasks', (req, res) => { // создать новую задачу.
+  // curl -XPOST -H 'Content-Type: application/json' --data '{"text": "new task"}' localhost:8080/tasks/:id
+  app.post('/tasks/:id', (req, res) => { // создать новую задачу.
+    const { id } = req.params;
     const { text } = req.body;
-    const newTask = new Task(text);
+    const newTask = new Task(id, text);
     tasks.push(newTask);
     res.json(newTask);
   });
@@ -35,6 +46,8 @@ export default () => {
     const { id, state } = req.params;
     const data = tasks.find((task) => task.id === id);
     _.set(data, 'state', state);
+    console.log(data);
+    // console.log(tasks);
     res.json(data);
   });
  
