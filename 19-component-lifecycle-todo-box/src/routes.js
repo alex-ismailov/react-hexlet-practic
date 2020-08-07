@@ -1,5 +1,5 @@
-const host = '';
-
+// const host = '';
+const host = 'http://localhost:8080';
 export default {
   tasksPath: () => [host, 'tasks'].join('/'),
   taskPath: (id) => [host, 'tasks', id].join('/'),
