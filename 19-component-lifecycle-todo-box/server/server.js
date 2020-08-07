@@ -7,8 +7,10 @@ export default () => {
   const app = new Express();
 
   const tasks = [
-    new Task(1003, 'asdf', 'finished'),
-    new Task(1004, 'asdasd'),
+    new Task(1, 'task 1'),
+    new Task(2, 'task 2', 'finished'),
+    // { id: 2, text: 'task 2', state: 'finished' },
+    // { id: 1, text: 'task 1', state: 'active' }
   ];
 
   /* switch off CORS policy */
@@ -44,8 +46,10 @@ export default () => {
   // curl -XPATCH "localhost:8080/tasks/:id/:state"
   app.patch('/tasks/:id/:state', (req, res) => { // переоткрыть завершенную задачу.
     const { id, state } = req.params;
+    const taskState = state === 'activate' ? 'active' : 'finished';
+    console.log(taskState);
     const data = tasks.find((task) => task.id === id);
-    _.set(data, 'state', state);
+    _.set(data, 'state', taskState);
     console.log(data);
     // console.log(tasks);
     res.json(data);
