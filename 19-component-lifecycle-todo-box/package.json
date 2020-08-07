@@ -6,13 +6,18 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.2",
     "express": "^4.17.1",
+    "immutability-helper": "^3.1.1",
     "lodash": "^4.17.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
   "type": "module",
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -33,5 +38,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.5.0",
+    "nock": "^13.0.3",
+    "timeout-then": "^2.0.0"
   }
 }
