@@ -1,8 +1,8 @@
-import _ from 'lodash';
+// import _ from 'lodash';
 
 export default class Task {
-  constructor(text, state = 'active') {
-    this.id = _.uniqueId();
+  constructor(id, text, state = 'active') {
+    this.id = id;
     this.text = text;
     this.state = state;
   }
