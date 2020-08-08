@@ -6,11 +6,10 @@ import _ from 'lodash';
 export default () => {
   const app = new Express();
 
+  // my data base
   const tasks = [
-    new Task(_.uniqueId(), 'task 1'),
     new Task(_.uniqueId(), 'task 2', 'finished'),
-    // { id: 2, text: 'task 2', state: 'finished' },
-    // { id: 1, text: 'task 1', state: 'active' }
+    new Task(_.uniqueId(), 'task 1'),
   ];
 
   /* switch off CORS policy */
@@ -38,7 +37,7 @@ export default () => {
   app.post('/tasks/', (req, res) => { // создать новую задачу.
     const { text } = req.body;
     const newTask = new Task(_.uniqueId(), text);
-    tasks.push(newTask);
+    tasks.unshift(newTask);
     res.json(newTask);
   });
 
@@ -54,15 +53,14 @@ export default () => {
   // curl -XPATCH "localhost:8080/tasks/:id/:state"
   app.patch('/tasks/:id/:state', (req, res) => { // переоткрыть завершенную задачу.
     const { id, state } = req.params;
-    const taskState = state === 'activate' ? 'active' : 'finished';
-    console.log(taskState);
+    const taskState = state === 'activate'
+      ? 'active'
+      : 'finished';
+
     const data = tasks.find((task) => task.id === id);
     _.set(data, 'state', taskState);
-    console.log(data);
-    // console.log(tasks);
     res.json(data);
   });
  
   return app;
 };
-
