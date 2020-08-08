@@ -3,15 +3,27 @@
 import React from 'react';
 
 // BEGIN (write your solution here)
-export default (props) => {
-  const { id, body, onClick} = props;
+const Item = (props) => {
+  const {
+    id,
+    body,
+    onClick,
+    state,
+  } = props;
+
+  const taskLink = state === 'active'
+    ? <a onClick={onClick} href="#" className="todo-task">{body}</a>
+    : <s><a onClick={onClick} href="#" className="todo-task">{body}</a></s>;
+
   return (
     <div className="row">
       <div className="col-1">{id}</div>
       <div className="col">
-        <a onClick={onClick} href="#" className="todo-task">{body}</a>
+        {taskLink}
       </div>
     </div>
   );
 };
+
+export default Item;
 // END
