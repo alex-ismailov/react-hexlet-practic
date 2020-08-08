@@ -11,7 +11,7 @@ Enzyme.configure({ adapter: new Adapter() });
 axios.defaults.adapter = httpAdapter;
 nock.disableNetConnect();
 
-const host = 'http://localhost';
+const host = 'http://localhost:8080';
 
 test('TodoBox 1', async () => {
   nock(host)
