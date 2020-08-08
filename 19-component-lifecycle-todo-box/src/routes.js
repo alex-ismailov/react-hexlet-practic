@@ -1,5 +1,5 @@
-// const host = '';
-const host = 'http://localhost:8080';
+// const host = ''; // for hexlet tests
+const host = 'http://localhost:8080'; // for local tests
 export default {
   tasksPath: () => [host, 'tasks'].join('/'),
   taskPath: (id) => [host, 'tasks', id].join('/'),
