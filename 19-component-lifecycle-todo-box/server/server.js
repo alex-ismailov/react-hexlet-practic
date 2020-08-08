@@ -7,8 +7,8 @@ export default () => {
   const app = new Express();
 
   const tasks = [
-    new Task(1, 'task 1'),
-    new Task(2, 'task 2', 'finished'),
+    new Task(_.uniqueId(), 'task 1'),
+    new Task(_.uniqueId(), 'task 2', 'finished'),
     // { id: 2, text: 'task 2', state: 'finished' },
     // { id: 1, text: 'task 1', state: 'active' }
   ];
@@ -35,12 +35,20 @@ export default () => {
 
   // Формат запроса - {"text": "new task"}
   // curl -XPOST -H 'Content-Type: application/json' --data '{"text": "new task"}' localhost:8080/tasks/:id
-  app.post('/tasks/:id', (req, res) => { // создать новую задачу.
-    const { id } = req.params;
+  app.post('/tasks/', (req, res) => { // создать новую задачу.
     const { text } = req.body;
-    const newTask = new Task(id, text);
+    const newTask = new Task(_.uniqueId(), text);
     tasks.push(newTask);
     res.json(newTask);
+  });
+
+  app.post('/tasks/:id', (req, res) => { // Потому что CRUD
+    // TODO
+    // В данном упражнении маршрут taskPath (taskPath: (id) => [host, 'tasks', id].join('/')) никак не используется. 
+    // А вообще такой маршрут является частью реализации соглашения CRUD и может быть использован для:
+    // GET /tasks/10 # просмотр задачи
+    // PATCH /tasks/10 # обновление задачи
+    // DELETE /tasks/10 # удаление задачи
   });
   
   // curl -XPATCH "localhost:8080/tasks/:id/:state"
