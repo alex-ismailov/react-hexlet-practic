@@ -37,86 +37,75 @@ export default class TodoBox extends React.Component {
     });
   };
 
-  handleTaskState = (id) => async (e) => {
+  handleActiveTask = (id) => async (e) => {
     e.preventDefault();
     const { tasks } = this.state;
-    const task = tasks.find((t) => t.id === id);
-
-    // если получать response при помощи тернарного оператора, то
-    // в итоге мы получим Promise даже не смотря на await !!!!
-    // const response = await task.state === 'active'
-    //   ? axios.patch(routes.finishTaskPath(id))
-    //   : axios.patch(routes.activateTaskPath(id));
-
-    let response;
-    if (task.state === 'active') {
-      response = await axios.patch(routes.finishTaskPath(id));
-    } else {
-      response = await axios.patch(routes.activateTaskPath(id));
-    }
-
+    await axios.patch(routes.activateTaskPath(id));
     const index = tasks.findIndex((t) => t.id === id);
-    const updatedTasks = update(tasks, { [index]: { state: { $set: response.data.state } } });
-
+    const updatedTasks = update(tasks, { [index]: { state: { $set: 'active' } } });
     this.setState({
       tasks: updatedTasks,
     });
+  };
+
+  handleFinishTask = (id) => async (e) => {
+    e.preventDefault();
+    const { tasks } = this.state;
+    await axios.patch(routes.finishTaskPath(id));
+    const index = tasks.findIndex((t) => t.id === id);
+    const updatedTasks = update(tasks, { [index]: { state: { $set: 'finished' } } });
+    this.setState({
+      tasks: updatedTasks,
+    });
+  };
+
+  renderActiveTasks(tasks) {
+    const taskItems = tasks.map((task) => (
+      <Item onClick={this.handleFinishTask(task.id)} key={task.id} task={task} />
+    ));
+
+    return <div className="todo-active-tasks">{taskItems}</div>;
   }
 
-  static taskId = 0;
+  renderFinishedTasks(tasks) {
+    const taskItems = tasks.map((task) => (
+      <Item onClick={this.handleActiveTask(task.id)} key={task.id} task={task} />
+    ));
 
-  renderTasks() {
-    const { tasks } = this.state;
+    return <div className="todo-finished-tasks">{taskItems}</div>;
+  }
 
-    const activeTasks = tasks
-      .filter(({ state }) => state === 'active')
-      .map(({ id, text, state }) => (
-        <Item onClick={this.handleTaskState(id)} key={id} id={id} body={text} state={state} />
-      ));
-
-    const finishedTasks = tasks
-      .filter(({ state }) => state === 'finished')
-      .map(({ id, text, state }) => (
-        <Item onClick={this.handleTaskState(id)} key={id} id={id} body={text} state={state} />
-      ));
-
-    const activeTasksBlock = activeTasks.length > 0
-      ? <div className="todo-active-tasks">{activeTasks}</div>
-      : null;
-
-    const finishedTasksBlock = finishedTasks.length > 0
-      ? <div className="todo-finished-tasks">{finishedTasks}</div>
-      : null;
-
+  renderForm() {
+    const { currentTaskText } = this.state;
     return (
-      <>
-        {activeTasksBlock}
-        {finishedTasksBlock}
-      </>
+      <form onSubmit={this.handleSubmitTask} className="todo-form form-inline mx-3">
+        <div className="form-group">
+          <input
+            onChange={this.handleInputTask}
+            type="text"
+            value={currentTaskText}
+            required
+            className="form-control mr-3"
+            placeholder="I am going..."
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">add</button>
+      </form>
     );
   }
 
   render() {
-    const { tasks, currentTaskText } = this.state;
+    const { tasks } = this.state;
+    const activeTasks = tasks.filter((task) => task.state === 'active');
+    const finishedTasks = tasks.filter((task) => task.state === 'finished');
 
     return (
       <div>
         <div className="mb-3">
-          <form onSubmit={this.handleSubmitTask} className="todo-form form-inline mx-3">
-            <div className="form-group">
-              <input
-                onChange={this.handleInputTask}
-                type="text"
-                value={currentTaskText}
-                required
-                className="form-control mr-3"
-                placeholder="I am going..."
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">add</button>
-          </form>
+          {this.renderForm()}
         </div>
-        {tasks.length > 0 && this.renderTasks()}
+        {activeTasks.length > 0 && this.renderActiveTasks(activeTasks)}
+        {finishedTasks.length > 0 && this.renderFinishedTasks(finishedTasks)}
       </div>
     );
   }
