@@ -5,21 +5,19 @@ import React from 'react';
 // BEGIN (write your solution here)
 const Item = (props) => {
   const {
-    id,
-    body,
+    task: { id },
+    task: { text },
+    task: { state },
     onClick,
-    state,
   } = props;
 
-  const taskLink = state === 'active'
-    ? <a onClick={onClick} href="#" className="todo-task">{body}</a>
-    : <s><a onClick={onClick} href="#" className="todo-task">{body}</a></s>;
+  const link = <a onClick={onClick} href="#" className="todo-task">{text}</a>;
 
   return (
     <div className="row">
       <div className="col-1">{id}</div>
       <div className="col">
-        {taskLink}
+        {state === 'finished' ? <s>{link}</s> : link}
       </div>
     </div>
   );
