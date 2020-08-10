@@ -15,6 +15,10 @@ export default class TodoBox extends React.Component {
   }
 
   async componentDidMount() {
+    this.fetchTasks();
+  }
+
+  fetchTasks = async () => {
     const response = await axios.get(routes.tasksPath());
     this.setState({
       tasks: response.data,
@@ -77,6 +81,7 @@ export default class TodoBox extends React.Component {
 
   renderForm() {
     const { currentTaskText } = this.state;
+
     return (
       <form onSubmit={this.handleSubmitTask} className="todo-form form-inline mx-3">
         <div className="form-group">
