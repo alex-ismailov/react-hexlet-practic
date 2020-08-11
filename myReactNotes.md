@@ -1,5 +1,45 @@
 ## My React Notes
 
+
+#### Checking react-app against the Airbnb JavaScript style guide.
+
+First thing create an `.env` file in your project (if haven’t already.).
+
+In this `.env` file put the following line:
+
+`EXTEND_ESLINT=true`
+
+Install the `Airbnb` style guide into our project. 
+
+`npm install eslint-config-airbnb -D`
+
+open the `package.json` and add `airbnb` to the extends option:
+
+```
+{
+  ...
+  "eslintConfig": {
+      "extends": ["react-app", "airbnb"]
+  }
+   ...
+}
+```
+
+we can check react-app code by running:
+
+`npx eslint filepath`
+
+or fix by running:
+
+`npx eslint --fix filepath`
+
+And that’s it!
+
+src: [Extending Create React App's ESLint config](https://gaya.pizza/articles/extending-cra-eslint-airbnb/)
+
+***
+
+
 #### Jest snapshot tests with enzyme
 
 Если expect(mount(<BtnGroup />).wrapper.render()) вместо html структуры возвращает js объект:
