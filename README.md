@@ -1,1 +1,1 @@
-## Solutions of exercises from the course react from hexlet
+## React and redux hexlet-practic
