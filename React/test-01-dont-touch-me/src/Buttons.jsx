@@ -12,25 +12,24 @@ export default class Buttons extends React.Component {
   static defaultProps = {
     count: 3,
   }
-  
+
   constructor(props) {
     super(props);
     this.state = {
-      activeBtnIndex: false,
-      btnCounts: new Array(props.count).fill(0, 0, props.count),
+      activeBtnIndex: null,
+      btnCounts: new Array(props.count).fill(0),
     };
   }
 
   handleButton = (index) => () => {
     this.setState(({ btnCounts }) => {
-      const currValue = btnCounts[index];
-      const copyBtnCounts = btnCounts.slice();
-      copyBtnCounts[index] = currValue + 1;
+      const updatedBtnCounts = btnCounts.slice();
+      updatedBtnCounts[index] += 1;
 
       return {
         activeBtnIndex: index,
-        btnCounts: copyBtnCounts,
-      }
+        btnCounts: updatedBtnCounts,
+      };
     });
   };
 
@@ -38,15 +37,13 @@ export default class Buttons extends React.Component {
     const { btnCounts, activeBtnIndex } = this.state;
 
     return btnCounts.map((btnCount, i) => {
-      const btnClass = cn({
-        btn: true,
-        'm-1': true,
+      const btnClass = cn('btn m-1', {
         'btn-primary': i !== activeBtnIndex,
         'btn-success': i === activeBtnIndex,
       });
 
       return (
-        <button onClick={this.handleButton(i)} key={i} className={btnClass} type="button">
+        <button onClick={this.handleButton(i)} key={`btn-${i}`} className={btnClass} type="button">
           {btnCount}
         </button>
       );
