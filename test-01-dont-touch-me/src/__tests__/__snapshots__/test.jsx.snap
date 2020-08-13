@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test app buttons buttons clicks 1`] = `
+Array [
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    0
+  </button>,
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    0
+  </button>,
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    0
+  </button>,
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    0
+  </button>,
+]
+`;
+
+exports[`Test app buttons buttons clicks 2`] = `
+Array [
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    1
+  </button>,
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    3
+  </button>,
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    5
+  </button>,
+  <button
+    class="btn m-1 btn-success"
+    type="button"
+  >
+    7
+  </button>,
+]
+`;
+
+exports[`Test app buttons default props 1`] = `
+Array [
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    0
+  </button>,
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    0
+  </button>,
+  <button
+    class="btn m-1 btn-primary"
+    type="button"
+  >
+    0
+  </button>,
+]
+`;
