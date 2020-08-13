@@ -1,0 +1,23 @@
+{
+  "name": "02-redux-store",
+  "version": "1.0.0",
+  "description": "### store.js",
+  "main": "actions.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.20",
+    "redux": "^4.0.5"
+  }
+}
