@@ -1,33 +1,43 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 
 import React from 'react';
-import { useImmer } from 'use-immer';
+// import { useImmer } from 'use-immer';
 import cn from 'classnames';
+
 
 // NOTE use web hooks with https://github.com/immerjs/use-immer
 
 // BEGIN (write your solution here)
 export default class Buttons extends React.Component {
+  static defaultProps = {
+    count: 3,
+  }
+  
   constructor(props) {
     super(props);
     this.state = {
       activeBtnIndex: false,
-      btnCounts: [],
+      btnCounts: new Array(props.count).fill(0, 0, props.count),
     };
   }
 
   handleButton = (index) => () => {
-    this.setState({
-      activeBtnIndex: index,
+    this.setState(({ btnCounts }) => {
+      const currValue = btnCounts[index];
+      const copyBtnCounts = btnCounts.slice();
+      copyBtnCounts[index] = currValue + 1;
+
+      return {
+        activeBtnIndex: index,
+        btnCounts: copyBtnCounts,
+      }
     });
   };
 
-  renderButtons() {
-    const { count } = this.props;
+  render() {
     const { btnCounts, activeBtnIndex } = this.state;
-    const res = [];
 
-    for (let i = 0; i < count; i += 1) {
+    return btnCounts.map((btnCount, i) => {
       const btnClass = cn({
         btn: true,
         'm-1': true,
@@ -35,19 +45,12 @@ export default class Buttons extends React.Component {
         'btn-success': i === activeBtnIndex,
       });
 
-      const btn = (
+      return (
         <button onClick={this.handleButton(i)} key={i} className={btnClass} type="button">
-          {btnCounts[i] ? btnCounts[i] : 0 }
+          {btnCount}
         </button>
       );
-      res.push(btn);
-    }
-
-    return res;
-  }
-
-  render() {
-    return this.renderButtons();
+    });
   }
 }
 // END
