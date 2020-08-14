@@ -6,10 +6,18 @@ const comments = (state = {}, action) => {
   switch (action.type) {
     case 'TASK_COMMENT_ADD': {
       const { id, taskId } = action.payload.comment;
-      return { ...state, [id]: { id, taskId }};
+      return { ...state, [id]: { id, taskId } };
     }
     case 'TASK_COMMENT_REMOVE': {
-      return;
+      const { id } = action.payload;
+      return _.omit(state, id);
+    }
+    case 'TASK_REMOVE': {
+      const { id } = action.payload;
+      const idKeys = Object.keys(state)
+        .filter((key) => state[key].taskId === id);
+
+      return _.omit(state, idKeys);
     }
     default:
       return state;
@@ -26,7 +34,7 @@ const tasks = (state = {}, action) => {
     }
     case 'TASK_REMOVE': {
       const { id } = action.payload;
-      return _.omit(state.tasks, id);
+      return _.omit(state, id);
     }
     default:
       return state;
@@ -34,11 +42,7 @@ const tasks = (state = {}, action) => {
   // END
 };
 
-
 export default combineReducers({
   comments,
   tasks,
 });
-
-// const buildComment =
-//  (id, task) => ({ id, taskId: task.id });
