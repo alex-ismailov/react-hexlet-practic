@@ -5,8 +5,8 @@ const comments = (state = {}, action) => {
   // BEGIN (write your solution here)
   switch (action.type) {
     case 'TASK_COMMENT_ADD': {
-      const { id, taskId } = action.payload.comment;
-      return { ...state, [id]: { id, taskId } };
+      const { comment } = action.payload;
+      return { ...state, [comment.id]: comment };
     }
     case 'TASK_COMMENT_REMOVE': {
       const { id } = action.payload;
@@ -14,10 +14,7 @@ const comments = (state = {}, action) => {
     }
     case 'TASK_REMOVE': {
       const { id } = action.payload;
-      const idKeys = Object.keys(state)
-        .filter((key) => state[key].taskId === id);
-
-      return _.omit(state, idKeys);
+      return _.omitBy(state, (c) => c.taskId === id);
     }
     default:
       return state;
@@ -29,8 +26,8 @@ const tasks = (state = {}, action) => {
   // BEGIN (write your solution here)
   switch (action.type) {
     case 'TASK_ADD': {
-      const { id } = action.payload.task;
-      return { ...state, [id]: { id } };
+      const { task } = action.payload;
+      return { ...state, [task.id]: task };
     }
     case 'TASK_REMOVE': {
       const { id } = action.payload;
