@@ -33,6 +33,9 @@ store.subscribe(() => {
 });
 
 ReactDOM.render(
-  <Increment dispatch={store.dispatch} increment={increment} />,
+  <Increment
+    dispatch={store.dispatch}
+    increment={increment}
+  />,
   containerElement,
 );
