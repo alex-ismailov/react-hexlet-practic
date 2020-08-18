@@ -14,25 +14,22 @@ export default class App extends React.Component {
     dispatch(updateText(value));
   };
 
-  handleResetText = () => {
+  handleResetText = (e) => {
+    e.preventDefault();
     const { dispatch, resetText } = this.props;
     dispatch(resetText());
   };
 
-  renderText() {
-    const { text } = this.props;
-    return <div>{text}</div>;
-  }
-
   render() {
     const { text } = this.props;
+    
     return (
       <div>
         <form>
           <input onChange={this.handleInputText} type="text" value={text} />
           <button onClick={this.handleResetText} type="button">Reset</button>
         </form>
-        {text && this.renderText()}
+        {text && <div>{text}</div>}
       </div>
     );
   }

@@ -14,8 +14,7 @@ const store = createStore(
 /* eslint-enable */
 
 // BEGIN (write your solution here)
-store.subscribe(() => {
-  const { text } = store.getState();
+const render = (text) => {
   ReactDOM.render(
     <App
       dispatch={store.dispatch}
@@ -25,14 +24,12 @@ store.subscribe(() => {
     />,
     document.getElementById('container'),
   );
+};
+
+store.subscribe(() => {
+  const { text } = store.getState();
+  render(text);
 });
 
-ReactDOM.render(
-  <App
-    dispatch={store.dispatch}
-    updateText={updateText}
-    resetText={resetText}
-  />,
-  document.getElementById('container'),
-);
+render();
 // END

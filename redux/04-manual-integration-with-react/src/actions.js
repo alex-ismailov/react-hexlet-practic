@@ -1,15 +1,13 @@
 // BEGIN (write your solution here)
 export const updateText = (text) => ({
-  type: 'UPDATE',
+  type: 'TEXT_UPDATE',
   payload: {
     text,
   },
 });
 
 export const resetText = () => ({
-  type: 'RESET',
-  payload: {
-    text: '',
-  },
+  type: 'TEXT_RESET',
+  payload: {},
 });
 // END

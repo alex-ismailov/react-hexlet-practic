@@ -3,12 +3,13 @@ import { combineReducers } from 'redux';
 const text = (state = '', action) => {
   // BEGIN (write your solution here)
   switch (action.type) {
-    case 'UPDATE':
+    case 'TEXT_UPDATE': {
       const { text } = action.payload;
       return text;
-    case 'RESET':
+    }
+    case 'TEXT_RESET': {
       return '';
-
+    }
     default:
       return state;
   }
