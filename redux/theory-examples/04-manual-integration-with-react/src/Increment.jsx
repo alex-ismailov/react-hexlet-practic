@@ -7,7 +7,7 @@ export default class Incerement extends React.Component {
   
   handleClick = () => {
     const { dispatch, increment } = this.props;
-    dispatch(increment());
+    dispatch(increment(10));
   };
 
   render() {

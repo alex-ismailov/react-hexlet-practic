@@ -10,9 +10,9 @@ import reducers from './reducers.jsx';
 const store = createStore(reducers);
 
 // Создаём действие и оборачиваем его в функцию
-const increment = () => ({
+const increment = (step = 1) => ({
   type: 'INCREMENT',
-  payload: {},
+  payload: { step },
 });
 
 // Элемент для подключения React
