@@ -4,14 +4,6 @@ import _ from 'lodash';
 import { updateNewTaskText, addTask, removeTask } from '../actions/index';
 
 // BEGIN (write your solution here)
-// const mapStateToProps = (state) => {
-//   const props = {
-//     text: state.text,
-//     tasks: state.tasks,
-//   };
-//   return props;
-// };
-
 const mapStateToProps = ({ text, tasks }) => {
   const props = { text, tasks };
   return props;
