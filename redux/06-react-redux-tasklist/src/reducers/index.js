@@ -15,7 +15,20 @@ const text = (state = '', action) => {
 };
 
 // BEGIN (write your solution here)
+const tasks = (state = [], action) => {
+  switch (action.type) {
+    case 'TASK_ADD': {
 
+      return;
+    }
+    case 'TASK_REMOVE': {
+
+      return;
+    }
+    default:
+      return state;
+  }
+};
 // END
 
 export default combineReducers({
