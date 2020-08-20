@@ -18,8 +18,10 @@ const text = (state = '', action) => {
 const tasks = (state = [], action) => {
   switch (action.type) {
     case 'TASK_ADD': {
-
-      return;
+      const { task } = action.payload;
+      console.log(task);
+      return [task, ...state];
+      // return state;
     }
     case 'TASK_REMOVE': {
 
