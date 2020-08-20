@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 
 class App extends React.Component {
 
-  handleInputText = (e) => {
+  handleInputTaskText = (e) => {
     const { dispatch } = this.props;
     const { target: { value } } = e;
     dispatch(updateNewTaskText(value));
@@ -24,31 +24,35 @@ class App extends React.Component {
   handleAddTask = (e) => {
     e.preventDefault();
     const { dispatch, text } = this.props;
-    console.log(text);
-
     const newTask = { id: _.uniqueId(), text };
-    // нужен prop в котором текущий текст 
-
     dispatch(addTask(newTask));
   };
 
+  handleRemoveTask = (id) => () => {
+    const { dispatch } = this.props;
+    dispatch(removeTask(id));
+  };
 
   renderTasks() {
     const { tasks } = this.props;
     if(tasks.length === 0) {
       return null;
     }
-    // TODO
-    // return 'TODO tasks.map(....)';
     
-    return tasks.map((task) => (
+    const taskItems = tasks.map((task) => (
       <li key={task.id} className="list-group-item d-flex">
         <span className="mr-auto">{task.text}</span>
         <button type="button" className="close">
-          <span>&times;</span>
+          <span onClick={this.handleRemoveTask(task.id)}>&times;</span>
         </button>
       </li>
     ));
+
+    return (
+      <div class="mt-3">
+        <ul class="list-group">{taskItems}</ul>
+      </div>
+    );
   }
 
   render() {
@@ -58,7 +62,7 @@ class App extends React.Component {
       <div className="col-5">
         <form onSubmit={this.handleAddTask} action="" className="form-inline">
           <div className="form-group mx-sm-3">
-            <input onChange={this.handleInputText} type="text" required value={text} />
+            <input onChange={this.handleInputTaskText} type="text" required value={text} />
           </div>
           <button type="submit" className="btn btn-primary btn-sm">Add</button>
         </form>
