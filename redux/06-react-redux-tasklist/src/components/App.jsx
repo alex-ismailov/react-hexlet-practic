@@ -21,10 +21,20 @@ class App extends React.Component {
     dispatch(updateNewTaskText(value));
   };
 
+  handleAddTask = (e) => {
+    e.preventDefault();
+    const { dispatch, text } = this.props;
+    console.log(text);
+
+    const newTask = { id: _.uniqueId(), text };
+    // нужен prop в котором текущий текст 
+
+    dispatch(addTask(newTask));
+  };
+
 
   renderTasks() {
     const { tasks } = this.props;
-    console.log(tasks);
     if(tasks.length === 0) {
       return null;
     }
@@ -32,8 +42,8 @@ class App extends React.Component {
     // return 'TODO tasks.map(....)';
     
     return tasks.map((task) => (
-      <li className="list-group-item d-flex">
-        <span className="mr-auto">{task}</span>
+      <li key={task.id} className="list-group-item d-flex">
+        <span className="mr-auto">{task.text}</span>
         <button type="button" className="close">
           <span>&times;</span>
         </button>
@@ -43,11 +53,10 @@ class App extends React.Component {
 
   render() {
     const { text } = this.props;
-    console.log(text);
 
     return (
       <div className="col-5">
-        <form action="" className="form-inline">
+        <form onSubmit={this.handleAddTask} action="" className="form-inline">
           <div className="form-group mx-sm-3">
             <input onChange={this.handleInputText} type="text" required value={text} />
           </div>
