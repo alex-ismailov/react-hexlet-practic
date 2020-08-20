@@ -1,20 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { updateNewTaskText, addTask, removeTask } from '../actions/index.js';
+import { updateNewTaskText, addTask, removeTask } from '../actions/index';
 
 // BEGIN (write your solution here)
-
 const mapStateToProps = (state) => {
   const props = {
     text: state.text,
     tasks: state.tasks,
-  }
+  };
   return props;
 };
 
 class App extends React.Component {
-
   handleInputTaskText = (e) => {
     const { dispatch } = this.props;
     const { target: { value } } = e;
@@ -35,22 +33,22 @@ class App extends React.Component {
 
   renderTasks() {
     const { tasks } = this.props;
-    if(tasks.length === 0) {
+    if (tasks.length === 0) {
       return null;
     }
-    
+
     const taskItems = tasks.map((task) => (
       <li key={task.id} className="list-group-item d-flex">
         <span className="mr-auto">{task.text}</span>
-        <button type="button" className="close">
-          <span onClick={this.handleRemoveTask(task.id)}>&times;</span>
+        <button onClick={this.handleRemoveTask(task.id)} type="button" className="close">
+          <span>&times;</span>
         </button>
       </li>
     ));
 
     return (
-      <div class="mt-3">
-        <ul class="list-group">{taskItems}</ul>
+      <div className="mt-3">
+        <ul className="list-group">{taskItems}</ul>
       </div>
     );
   }
@@ -72,5 +70,5 @@ class App extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(App);
 // END
