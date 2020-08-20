@@ -14,7 +14,7 @@ export const addTask = (task) => ({
 });
 
 export const removeTask = (id) => ({
-  type: '???',
+  type: 'TASK_REMOVE',
   payload: {
     id,
   }
