@@ -7,7 +7,7 @@ export const updateNewTaskText = (text) => ({
 
 // BEGIN (write your solution here)
 export const addTask = (task) => ({
-  type: '???',
+  type: 'TASK_ADD',
   payload: {
     task,
   } 
