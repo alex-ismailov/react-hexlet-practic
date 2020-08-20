@@ -19,13 +19,11 @@ const tasks = (state = [], action) => {
   switch (action.type) {
     case 'TASK_ADD': {
       const { task } = action.payload;
-      console.log(task);
       return [task, ...state];
-      // return state;
     }
     case 'TASK_REMOVE': {
-
-      return;
+      const { id } = action.payload;
+      return state.filter((task) => task.id !== id);
     }
     default:
       return state;
