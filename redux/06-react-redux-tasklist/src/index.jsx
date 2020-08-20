@@ -13,5 +13,10 @@ const store = createStore(
 /* eslint-enable */
 
 // BEGIN (write your solution here)
-
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('container'),
+);
 // END
