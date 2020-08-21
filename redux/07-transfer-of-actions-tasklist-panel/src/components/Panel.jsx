@@ -16,19 +16,41 @@ const actionCreators = {
   generateTasks: actions.generateTasks,
   cleanTasks: actions.cleanTasks,
   addTask: actions.addTask,
-  cleanTasks: actions.cleanTasks,
 };
 
 class Panel extends React.Component {
+  // handleTasksGenerate = (e) => {
+  //   e.preventDefault();
+  //   const { addTask, cleanTasks } = this.props;
+  //   cleanTasks();
+  //   const TASK_AMOUNT = 5;
+  //   for (let i = 0; i < TASK_AMOUNT; i += 1) {
+  //     const task = { id: _.uniqueId(), text: faker.lorem.sentence() };
+  //     addTask(task);
+  //   }
+  // };
+
+  // handleTasksGenerate = (e) => {
+  //   e.preventDefault();
+  //   const { generateTasks } = this.props;
+  //   const TASK_AMOUNT = 5;
+  //   const tasks = [];
+  //   for (let i = 0; i < TASK_AMOUNT; i += 1) {
+  //     tasks.push({ id: _.uniqueId(), text: faker.lorem.sentence() });
+  //   }
+  //   generateTasks(tasks.reverse());
+  // };
+
   handleTasksGenerate = (e) => {
     e.preventDefault();
-    const { addTask, cleanTasks } = this.props;
-    cleanTasks();
-    const TASK_AMOUNT = 5;
-    for (let i = 0; i < TASK_AMOUNT; i += 1) {
-      const task = { id: _.uniqueId(), text: faker.lorem.sentence() };
-      addTask(task);
-    }
+    const { generateTasks } = this.props;
+    const TASKS_AMOUNT = 5;
+    const tasks = new Array(TASKS_AMOUNT).fill(null)
+      .map(() => (
+        { id: _.uniqueId(), text: faker.lorem.sentence() }
+      ));
+
+    generateTasks(tasks.reverse());
   };
 
   handleTasksClean = (e) => {
@@ -38,7 +60,6 @@ class Panel extends React.Component {
   };
 
   render() {
-
     return (
       <div className="py-3">
         <button onClick={this.handleTasksClean} type="button" data-test="clean" className="btn btn-warning btn-sm mr-3">Clean</button>
