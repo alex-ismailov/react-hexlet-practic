@@ -1,6 +1,9 @@
 // BEGIN (write your solution here)
 import React from 'react';
 import { connect } from 'react-redux';
+// import { removeTask } from '../actions/index.js';
+
+import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
   const props = {
@@ -9,7 +12,16 @@ const mapStateToProps = (state) => {
   return props;
 };
 
+const actionCreators = {
+  removeTask: actions.removeTask, 
+};
+
 class Tasks extends React.Component {
+  handleTaskRemove = (id) => () => {
+    const { removeTask } = this.props;
+    removeTask(id);
+  };
+
   render() {
     const { tasks } = this.props;
     if (tasks.length === 0) {
@@ -22,7 +34,7 @@ class Tasks extends React.Component {
           {tasks.map((task) => (
             <li key={task.id} className="list-group-item d-flex">
               <span className="mr-auto">{task.text}</span>
-              <button type="button" className="close"><span>×</span></button>
+              <button onClick={this.handleTaskRemove(task.id)} type="button" className="close"><span>×</span></button>
             </li>
           ))}
         </ul>
@@ -31,5 +43,5 @@ class Tasks extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Tasks);
+export default connect(mapStateToProps, actionCreators)(Tasks);
 // END
