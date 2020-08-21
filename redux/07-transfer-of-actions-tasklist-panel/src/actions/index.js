@@ -20,5 +20,15 @@ export const removeTask = (id) => ({
 });
 
 // BEGIN (write your solution here)
+export const generateTasks = (tasks) => ({
+  type: 'TASK_GENERATE',
+  payload: {
+    tasks,
+  },
+});
 
+export const cleanTasks = () => ({
+  type: 'TASK_CLEAN',
+  payload: {},
+});
 // END
