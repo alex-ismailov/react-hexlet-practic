@@ -21,7 +21,7 @@ export const removeTask = (id) => ({
 
 // BEGIN (write your solution here)
 export const generateTasks = (tasks) => ({
-  type: 'TASK_GENERATE',
+  type: 'TASK_REPLACE',
   payload: {
     tasks,
   },
