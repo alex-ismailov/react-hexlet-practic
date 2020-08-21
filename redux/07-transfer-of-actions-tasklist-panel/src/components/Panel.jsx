@@ -5,52 +5,19 @@ import faker from '../faker.js';
 import * as actions from '../actions/index.js';
 
 // BEGIN (write your solution here)
-const mapStateToProps = (state) => {
-  const props = {
-    tasks: state.tasks,
-  };
-  return props;
-};
-
 const actionCreators = {
   generateTasks: actions.generateTasks,
   cleanTasks: actions.cleanTasks,
-  addTask: actions.addTask,
 };
 
 class Panel extends React.Component {
-  // handleTasksGenerate = (e) => {
-  //   e.preventDefault();
-  //   const { addTask, cleanTasks } = this.props;
-  //   cleanTasks();
-  //   const TASK_AMOUNT = 5;
-  //   for (let i = 0; i < TASK_AMOUNT; i += 1) {
-  //     const task = { id: _.uniqueId(), text: faker.lorem.sentence() };
-  //     addTask(task);
-  //   }
-  // };
-
-  // handleTasksGenerate = (e) => {
-  //   e.preventDefault();
-  //   const { generateTasks } = this.props;
-  //   const TASK_AMOUNT = 5;
-  //   const tasks = [];
-  //   for (let i = 0; i < TASK_AMOUNT; i += 1) {
-  //     tasks.push({ id: _.uniqueId(), text: faker.lorem.sentence() });
-  //   }
-  //   generateTasks(tasks.reverse());
-  // };
-
   handleTasksGenerate = (e) => {
     e.preventDefault();
     const { generateTasks } = this.props;
-    const TASKS_AMOUNT = 5;
-    const tasks = new Array(TASKS_AMOUNT).fill(null)
-      .map(() => (
-        { id: _.uniqueId(), text: faker.lorem.sentence() }
-      ));
+    const makeNewTask = () => ({ id: _.uniqueId(), text: faker.lorem.sentence() });
+    const tasks = _.times(5, makeNewTask).reverse();
 
-    generateTasks(tasks.reverse());
+    generateTasks(tasks);
   };
 
   handleTasksClean = (e) => {
@@ -69,5 +36,5 @@ class Panel extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, actionCreators)(Panel);
+export default connect(null, actionCreators)(Panel);
 // END
