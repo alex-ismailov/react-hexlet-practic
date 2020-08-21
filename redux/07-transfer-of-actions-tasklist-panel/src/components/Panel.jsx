@@ -15,11 +15,20 @@ const mapStateToProps = (state) => {
 const actionCreators = {
   generateTasks: actions.generateTasks,
   cleanTasks: actions.cleanTasks,
+  addTask: actions.addTask,
 };
 
 class Panel extends React.Component {
-  handleTasksGenerate = () => {
+  // { id: _.uniqueId(), text: faker.lorem.sentence() };
 
+  handleTasksGenerate = () => {
+    const { addTask } = this.props;
+    const TASK_AMOUNT = 5;
+    for (let i = 0; i < TASK_AMOUNT; i += 1) {
+      const task = { id: _.uniqueId(), text: faker.lorem.sentence() };
+      // const task = { id: _.uniqueId(), text: `${i}_${faker.lorem.sentence()}` };
+      addTask(task);
+    }
   };
 
   handleTasksClean = () => {
