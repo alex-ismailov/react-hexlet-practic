@@ -22,7 +22,7 @@ const tasks = (state = [], action) => {
       return state.filter((t) => t.id !== action.payload.id);
     }
     // BEGIN (write your solution here)
-    case 'TASK_GENERATE': {
+    case 'TASK_REPLACE': {
       return action.payload.tasks;
     }
     case 'TASK_CLEAN': {
