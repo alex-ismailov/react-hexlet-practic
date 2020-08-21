@@ -23,7 +23,7 @@ const tasks = (state = [], action) => {
     }
     // BEGIN (write your solution here)
     case 'TASK_GENERATE': {
-      return;
+      return action.payload.tasks;
     }
     case 'TASK_CLEAN': {
       return [];
