@@ -19,25 +19,25 @@ test('Store', () => {
     </Provider>
   );
   const wrapper = mount(vdom);
-  expect(wrapper.render()).toMatchSnapshot();
+  expect(wrapper.render()).toMatchSnapshot(); // store 1
 
   const generateTasksButton = wrapper.find('button[data-test="generate"]');
   const cleanTasksButton = wrapper.find('button[data-test="clean"]');
 
   generateTasksButton.simulate('click');
-  expect(wrapper.render()).toMatchSnapshot();
+  expect(wrapper.render()).toMatchSnapshot(); // store 2
   cleanTasksButton.simulate('click');
-  expect(wrapper.render()).toMatchSnapshot();
+  expect(wrapper.render()).toMatchSnapshot(); // store 3
   cleanTasksButton.simulate('click');
-  expect(wrapper.render()).toMatchSnapshot();
+  expect(wrapper.render()).toMatchSnapshot(); // store 4
   generateTasksButton.simulate('click');
-  expect(wrapper.render()).toMatchSnapshot();
+  expect(wrapper.render()).toMatchSnapshot(); // store 5
   generateTasksButton.simulate('click');
-  expect(wrapper.render()).toMatchSnapshot();
+  expect(wrapper.render()).toMatchSnapshot(); // store 6
 
   const closeButtons = wrapper.find('button.close');
   closeButtons.forEach((button) => {
     button.simulate('click');
   });
-  expect(wrapper.render()).toMatchSnapshot();
+  expect(wrapper.render()).toMatchSnapshot(); // store 7
 });
