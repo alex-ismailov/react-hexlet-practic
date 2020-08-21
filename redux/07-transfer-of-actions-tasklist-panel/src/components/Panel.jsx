@@ -16,22 +16,23 @@ const actionCreators = {
   generateTasks: actions.generateTasks,
   cleanTasks: actions.cleanTasks,
   addTask: actions.addTask,
+  cleanTasks: actions.cleanTasks,
 };
 
 class Panel extends React.Component {
-  // { id: _.uniqueId(), text: faker.lorem.sentence() };
-
-  handleTasksGenerate = () => {
-    const { addTask } = this.props;
+  handleTasksGenerate = (e) => {
+    e.preventDefault();
+    const { addTask, cleanTasks } = this.props;
+    cleanTasks();
     const TASK_AMOUNT = 5;
     for (let i = 0; i < TASK_AMOUNT; i += 1) {
       const task = { id: _.uniqueId(), text: faker.lorem.sentence() };
-      // const task = { id: _.uniqueId(), text: `${i}_${faker.lorem.sentence()}` };
       addTask(task);
     }
   };
 
-  handleTasksClean = () => {
+  handleTasksClean = (e) => {
+    e.preventDefault();
     const { cleanTasks } = this.props;
     cleanTasks();
   };
