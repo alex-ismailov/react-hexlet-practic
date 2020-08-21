@@ -1,8 +1,6 @@
 // BEGIN (write your solution here)
 import React from 'react';
 import { connect } from 'react-redux';
-// import { removeTask } from '../actions/index.js';
-
 import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
@@ -13,7 +11,7 @@ const mapStateToProps = (state) => {
 };
 
 const actionCreators = {
-  removeTask: actions.removeTask, 
+  removeTask: actions.removeTask,
 };
 
 class Tasks extends React.Component {
@@ -27,7 +25,7 @@ class Tasks extends React.Component {
     if (tasks.length === 0) {
       return null;
     }
-    
+
     return (
       <div className="mt-3">
         <ul className="list-group">
