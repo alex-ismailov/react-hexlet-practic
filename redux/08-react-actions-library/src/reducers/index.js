@@ -16,7 +16,7 @@ const defaultState = {
 
 const taskText = handleActions(
   {
-    [updateNewTaskText]: (state, { payload: text }) => text,
+    [updateNewTaskText]: (state, { payload: { text } }) => text,
     [addTask]: () => '',
   },
   defaultState.text,
@@ -24,8 +24,8 @@ const taskText = handleActions(
 
 const tasks = handleActions(
   {
-    [addTask]: (state, { payload: task }) => [task, ...state],
-    [removeTask]: (state, { payload: id }) => state.filter((task) => task.id !== id),
+    [addTask]: (state, { payload: { task } }) => [task, ...state],
+    [removeTask]: (state, { payload: { id } }) => state.filter((task) => task.id !== id),
   },
   defaultState.tasks,
 );
