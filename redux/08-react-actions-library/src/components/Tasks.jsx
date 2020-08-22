@@ -15,7 +15,7 @@ class Tasks extends React.Component {
   // BEGIN (write your solution here)
   handleRemoveTask = (id) => () => {
     const { removeTask } = this.props;
-    removeTask(id);
+    removeTask({ id });
   };
   // END
 
