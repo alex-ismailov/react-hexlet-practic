@@ -6,28 +6,26 @@ import * as actions from '../actions/index.js';
 const {
   updateNewTaskText,
   addTask,
+  removeTask,
 } = actions;
 
 const defaultState = {
   text: '',
   tasks: [],
 };
+
 const taskText = handleActions(
   {
-    [updateNewTaskText]: (state, { payload: text }) => {
-      return text;
-    },
-    [addTask]: () => {
-      return '';
-    }
+    [updateNewTaskText]: (state, { payload: text }) => text,
+    [addTask]: () => '',
   },
   defaultState.text,
 );
+
 const tasks = handleActions(
   {
-    [addTask]: (state, { payload: task }) => {
-      return [ task, ...state ];
-    }
+    [addTask]: (state, { payload: task }) => [task, ...state],
+    [removeTask]: (state, { payload: id }) => state.filter((task) => task.id !== id),
   },
   defaultState.tasks,
 );
