@@ -15,7 +15,18 @@ const actionCreators = {
 
 class NewTaskForm extends React.Component {
   // BEGIN (write your solution here)
-  
+  handleUpdateNewTaskText = (e) => {
+    const { target: { value } } = e;
+    const { updateNewTaskText } = this.props;
+    updateNewTaskText(value);
+  };
+
+  handleAddTask = (e) => {
+    e.preventDefault();
+    const { addTask, text } = this.props;
+    const newTask = { id: _.uniqueId(), text };
+    addTask(newTask);
+  };
   // END
 
   render() {
