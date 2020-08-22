@@ -18,14 +18,14 @@ class NewTaskForm extends React.Component {
   handleUpdateNewTaskText = (e) => {
     const { target: { value } } = e;
     const { updateNewTaskText } = this.props;
-    updateNewTaskText(value);
+    updateNewTaskText({ text: value });
   };
 
   handleAddTask = (e) => {
     e.preventDefault();
     const { addTask, text } = this.props;
-    const newTask = { id: _.uniqueId(), text };
-    addTask(newTask);
+    const task = { id: _.uniqueId(), text };
+    addTask({ task });
   };
   // END
 
