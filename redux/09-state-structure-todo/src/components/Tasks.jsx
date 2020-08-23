@@ -1,9 +1,15 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/index.js';
 
 // BEGIN (write your solution here)
-
+const mapStateToProps = (state) => {
+  const { byId, allIds } = state.tasks;
+  const tasks = allIds.map((id) => byId[id]);
+  return { tasks };
+};
 // END
 
 const actionCreators = {
