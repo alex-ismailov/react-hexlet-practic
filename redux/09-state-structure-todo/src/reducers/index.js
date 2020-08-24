@@ -20,14 +20,17 @@ const tasks = handleActions({
   },
   // BEGIN (write your solution here)
   [actions.toggleTaskState]: (state, { payload: { id } }) => {
-    const newTaskState = state.byId[id].state === 'active'
+    const task = state.byId[id];
+    const newTaskState = task.state === 'active'
       ? 'finished'
       : 'active';
 
-    const newState = { ...state };
-    _.set(newState, ['byId', id, 'state'], newTaskState);
+    const updatedTask = { ...task, state: newTaskState };
 
-    return newState;
+    return {
+      ...state,
+      byId: { ...state.byId, [task.id]: updatedTask },
+    };
   },
   // END
 }, { byId: {}, allIds: [] });
