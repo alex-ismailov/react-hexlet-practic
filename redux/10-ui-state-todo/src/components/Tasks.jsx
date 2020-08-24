@@ -29,13 +29,13 @@ class Tasks extends React.Component {
   };
 
   render() {
-    const { tasksUIState } = this.props;
-    console.log(tasksUIState);
-
-    // TODO bg-light text-dark <=> bg-dark text-light
     const { tasks } = this.props;
+    if (tasks.length === 0) {
+      return null;
+    }
 
-    const commonClasses = `list-group-item d-flex`;
+    const { tasksUIState } = this.props;
+    const commonClasses = 'list-group-item d-flex';
     const lightClasses = cn(commonClasses, {
       'bg-light': true,
       'text-dark': true,
