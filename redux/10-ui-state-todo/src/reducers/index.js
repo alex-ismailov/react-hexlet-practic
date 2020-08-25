@@ -17,14 +17,25 @@ const tasksUIState = handleActions({
   [actions.addTask](state, { payload: { task } }) {
     return { ...state, [task.id]: { theme: 'light' } };
   },
+  // [actions.inverseTaskTheme](state, { payload: { task } }) {
+  //   const currentTheme = state[task.id].theme;
+  //   const newTheme = currentTheme === 'light'
+  //     ? 'dark'
+  //     : 'light';
+
+  //   return { ...state, [task.id]: { theme: newTheme } };
+  // },
+  // END
+  
+  // BEGIN (taecher solution here)
   [actions.inverseTaskTheme](state, { payload: { task } }) {
     const currentTheme = state[task.id].theme;
-    const newTheme = currentTheme === 'light'
-      ? 'dark'
-      : 'light';
-
-    return { ...state, [task.id]: { theme: newTheme } };
-  },
+    const mapping = {
+      dark: 'light',
+      light: 'dark',
+    };
+    return { ...state, [task.id]: { theme: mapping[currentTheme]}};
+  }
   // END
 }, {});
 
