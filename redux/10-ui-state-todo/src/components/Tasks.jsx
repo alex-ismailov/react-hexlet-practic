@@ -7,13 +7,8 @@ import * as actions from '../actions/index.js';
 
 const mapStateToProps = (state) => {
   // BEGIN (write your solution here)
-  const {
-    tasks: { byId, allIds },
-    tasksUIState,
-  } = state;
-
+  const { tasks: { byId, allIds }, tasksUIState } = state;
   const tasks = allIds.map((id) => byId[id]);
-
   return { tasks, tasksUIState };
   // END
 };
