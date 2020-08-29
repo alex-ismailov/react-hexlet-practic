@@ -4,7 +4,12 @@ import * as actions from '../actions/index.js';
 import { filteredTasksSelector } from '../selectors/index.js';
 
 // BEGIN (write your solution here)
-
+const mapStateToProps = (state) => {
+  const { tasks: { byId, allIds } } = state;
+  const tasks = allIds.map((id) => byId[id]);
+  console.log(tasks);
+  return { tasks };
+};
 // END
 
 const actionCreators = {
