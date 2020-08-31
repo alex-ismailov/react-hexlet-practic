@@ -4,12 +4,20 @@ import * as actions from '../actions/index.js';
 import { filteredTasksSelector } from '../selectors/index.js';
 
 // BEGIN (write your solution here)
+let counter = 0;
 const mapStateToProps = (state) => {
-  const { tasks: { byId, allIds } } = state;
-  const tasks = allIds.map((id) => byId[id]);
-  console.log(tasks);
-  return { tasks };
+  console.log(counter += 1);
+  const props = {
+    tasks: filteredTasksSelector(state),
+  };
+  return props;
 };
+// const mapStateToProps = (state) => {
+//   console.log(counter += 1);
+//   const { tasks: { byId, allIds } } = state;
+//   const tasks = allIds.map((id) => byId[id]);
+//   return { tasks };
+// };
 // END
 
 const actionCreators = {
