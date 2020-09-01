@@ -12,12 +12,6 @@ const mapStateToProps = (state) => {
   };
   return props;
 };
-// const mapStateToProps = (state) => {
-//   console.log(counter += 1);
-//   const { tasks: { byId, allIds } } = state;
-//   const tasks = allIds.map((id) => byId[id]);
-//   return { tasks };
-// };
 // END
 
 const actionCreators = {
