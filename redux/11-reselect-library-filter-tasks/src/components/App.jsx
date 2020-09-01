@@ -6,8 +6,8 @@ import Filter from './Filter.jsx';
 const App = () => (
   <div className="col-5">
     <NewTaskForm />
-    {/* <Filter /> */}
-    {/* <Tasks /> */}
+    <Filter />
+    <Tasks />
   </div>
 );
 export default App;
