@@ -19,7 +19,6 @@ class Filter extends React.Component {
 
   handleFilter = (e) => {
     e.preventDefault();
-    
   };
 
   render() {
