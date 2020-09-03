@@ -4,9 +4,7 @@ import * as actions from '../actions/index.js';
 import { filteredTasksSelector } from '../selectors/index.js';
 
 // BEGIN (write your solution here)
-let counter = 0;
 const mapStateToProps = (state) => {
-  console.log(counter += 1);
   const props = {
     tasks: filteredTasksSelector(state),
   };
