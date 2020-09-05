@@ -3,6 +3,7 @@ import omit from 'lodash/omit';
 import { createStore } from 'redux'
 
 // BEGIN (write your solution here)
+// reducer - (перев. с анлг.) преобразователь
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case 'TASK_ADD': {
