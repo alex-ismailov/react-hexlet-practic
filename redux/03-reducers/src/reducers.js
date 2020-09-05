@@ -14,7 +14,7 @@ const comments = (state = {}, action) => {
     }
     case 'TASK_REMOVE': {
       const { id } = action.payload;
-      return _.omitBy(state, (c) => c.taskId === id);
+      return _.omitBy(state, (comment) => comment.taskId === id);
     }
     default:
       return state;
