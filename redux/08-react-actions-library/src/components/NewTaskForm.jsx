@@ -50,3 +50,10 @@ class NewTaskForm extends React.Component {
 }
 
 export default connect(mapStateToProps, actionCreators)(NewTaskForm);
+
+
+// почему в функции, к примеру, в removeTask({ id }) мы передаём объект, а не просто id как до этого?:
+// https://ru.hexlet.io/topics/34433
+
+// в чем преимущество написания редьюсера в такой форме(теория): [actions.addUser](state, { payload: { user } })....
+// https://ru.hexlet.io/topics/35626
