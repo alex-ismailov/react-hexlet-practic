@@ -19,6 +19,9 @@ class Filter extends React.Component {
 
   handleFilter = (e) => {
     e.preventDefault();
+    const { setTasksFilter } = this.props;
+    const [,, filterName] = e.target.dataset.test.split('-');
+    setTasksFilter({ filterName });
   };
 
   render() {
@@ -37,7 +40,7 @@ class Filter extends React.Component {
               key={filterState}
               type="button"
               className="btn btn-link border-0 p-0"
-              data-test="task-filter-active"
+              data-test={`task-filter-${filterState}`}
             >
               {filterTitle}
             </button>
