@@ -33,6 +33,6 @@ const tasks = handleActions({
 export default combineReducers({
   tasks,
   // BEGIN (write your solution here)
-  
+  form: formReducer,
   // END
 });
