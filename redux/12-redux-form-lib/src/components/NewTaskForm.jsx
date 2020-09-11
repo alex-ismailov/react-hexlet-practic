@@ -15,7 +15,16 @@ const actionCreators = {
 
 class NewTaskForm extends React.Component {
   // BEGIN (write your solution here)
-  
+  addTask = (text) => {
+    const { addTask, reset } = this.props;
+    const task = { text, id: _.uniqueId(), state: 'active' };
+    addTask({ task });
+    reset();
+  };
+
+  handleSubmit = ({ text }) => {
+    this.addTask(text);
+  }
   // END
 
   render() {
@@ -33,5 +42,7 @@ class NewTaskForm extends React.Component {
 
 const ConnectedNewTaskForm = connect(mapStateToProps, actionCreators)(NewTaskForm);
 // BEGIN (write your solution here)
-
+export default reduxForm({
+  form: 'newTask',
+})(ConnectedNewTaskForm);
 // END
