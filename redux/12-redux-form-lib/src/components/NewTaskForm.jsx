@@ -15,15 +15,11 @@ const actionCreators = {
 
 class NewTaskForm extends React.Component {
   // BEGIN (write your solution here)
-  addTask = (text) => {
+  handleSubmit = (values) => {
     const { addTask, reset } = this.props;
-    const task = { text, id: _.uniqueId(), state: 'active' };
+    const task = { ...values, id: _.uniqueId(), state: 'active' };
     addTask({ task });
     reset();
-  };
-
-  handleSubmit = ({ text }) => {
-    this.addTask(text);
   }
   // END
 
