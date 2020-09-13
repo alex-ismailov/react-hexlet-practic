@@ -16,7 +16,7 @@ const store = createStore(
   reducers,
   compose(
     // BEGIN (write your solution here)
-    
+    applyMiddleware(thunk),
     // END
     devtoolMiddleware,
   ),
